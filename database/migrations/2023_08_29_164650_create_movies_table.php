@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->char('uuid', 36)->unique();
+            $table->bigInteger('movie_id')->unique();
             $table->string('title');
             $table->string('backdrop_path');
-            $table->bigInteger('movie_id')->unique();
             $table->string('original_language')->default('en');
             $table->string('original_title');
             $table->text('overview');

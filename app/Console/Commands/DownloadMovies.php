@@ -3,40 +3,38 @@
 namespace App\Console\Commands;
 
 use App\Models\Movie;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use JetBrains\PhpStorm\NoReturn;
 
 class DownloadMovies extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'app:download-movies';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Get movies from the movies db api';
 
-    /**
-     * Execute the console command.
-     */
-    #[NoReturn] public function handle(): void
+    public function handle(): int
     {
-        $authHeader = "Bearer " . config('services.movies.token');
+        try {
+            $authHeader = "Bearer " . config('services.movies.token');
 
-        $response = Http::acceptJson()
-            ->withHeader('Authorization', $authHeader)
-            ->get(config('services.movies.url'));
+            $response = Http::acceptJson()
+                ->withHeader('Authorization', $authHeader)
+                ->get(config('services.movies.url'));
 
-        $this->store(json_decode($response->body()));
+            $this->store(json_decode($response->body()));
+
+            $this->info('Successfully');
+
+            return self::SUCCESS;
+        } catch(Exception $exception) {
+            Log::error($exception->getTraceAsString());
+            $this->info('Error: '. $exception->getMessage());
+        }
+
+        return self::FAILURE;
     }
 
     private function store($data): void

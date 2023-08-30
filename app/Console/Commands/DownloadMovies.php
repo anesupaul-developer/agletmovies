@@ -43,7 +43,7 @@ class DownloadMovies extends Command
             $attributes = [
                 'title' => $movie->title,
                 'backdrop_path' => Str::remove('/', $movie->backdrop_path),
-                'movie_id' => $movie->id,
+                'movie_external_id' => $movie->id,
                 'original_language' => $movie->original_language,
                 'original_title' => $movie->original_title,
                 'overview' => $movie->overview,
@@ -54,7 +54,7 @@ class DownloadMovies extends Command
                 'vote_count' => $movie->vote_count,
             ];
 
-            Movie::updateOrCreate($attributes, ['movie_id' => $movie->id]);
+            Movie::updateOrCreate($attributes, ['movie_external_id' => $movie->id]);
         }
     }
 }

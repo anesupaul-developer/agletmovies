@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('movie_id')->unique();
+            $table->bigInteger('movie_external_id')->unique();
             $table->string('title');
             $table->string('backdrop_path');
             $table->string('original_language')->default('en');

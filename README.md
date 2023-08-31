@@ -14,7 +14,7 @@
     - DB_USERNAME
     - DB_PASSWORD
     - MOVIES_URL
-    - MOVIES_BEARER_TOKEN ( Bearer token from the api )
+    - MOVIES_BEARER_TOKEN ( Sign to their api to get this )
     - MOVIES_IMAGE_URL
 
 5. Set up your database agletmovies and import agletmovies-dump.sql in the root directory to your test database

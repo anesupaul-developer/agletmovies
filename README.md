@@ -36,6 +36,7 @@
       In a large application I would have gone with something like Repository Pattern
     - In a more complex application I would have added tests for data integrity
     - I used Laravel Pint to format my code so in teams it can be standard
+    - An improvement would be to download the images for the movies and host them rather than using the api movies url as this uses less network and loads the site faster
 
 ## Steps on developing the project
 
@@ -46,4 +47,9 @@
 5. I then added authentication using Laravel Breeze and added username field only to the already made boilerplate
 6. I then created controllers for retrieving paginated data and added favorite functionality
 7. I then created a layout for the frontend and pages required
+
+## Key notes
+1. On clicking the heart icon you either add it to favorites or remove it
+2. To view more details on the movie click the eye icon
+3. For pagination click the right and left arrows
 

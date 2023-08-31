@@ -3,7 +3,7 @@
          class="bg-white inline-block rounded cursor-pointer hover:shadow-[0_0_10px_3px_rgba(0,0,0,0.15)]">
         <div class="relative bg-[#FD384F] rounded-l">
             <button v-if="showFavorite" class="absolute left-0 top-0 text-red-900 fold-bold p-1 text-[12px]" @click="toggleFavorite(movie.id)">
-                <Icon icon="material-symbols:favorite-rounded" class="text-white text-[24px]" :class="movie.is_favorite ? 'text-red-700' : ''"/>
+                <Icon icon="material-symbols:favorite-rounded" class="text-[24px]" :class="movie.is_favorite ? 'text-yellow-300' : 'text-white'"/>
             </button>
             <img :src="movie.poster_image_url" class="rounded-t" :alt="movie.title" loading="lazy"/>
         </div>

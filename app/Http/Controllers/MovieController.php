@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\MovieRepositoryInterface;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -13,9 +13,13 @@ class MovieController extends Controller
     {
     }
 
-    public function index(Request $request): Response
+    public function index(): Response
     {
-        $movies = $this->repository->findAll($request->get('search'));
-        return Inertia::render('Movies/Index', []);
+        $movies = $this->repository->findAll();
+
+        return Inertia::render('Movies/Watch', [
+            'movies' => $movies,
+            'filters' => Request::only(['search'])
+        ]);
     }
 }

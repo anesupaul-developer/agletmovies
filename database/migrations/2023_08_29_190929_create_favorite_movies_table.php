@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('movie_id');
             $table->unique(['user_id', 'movie_id']);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

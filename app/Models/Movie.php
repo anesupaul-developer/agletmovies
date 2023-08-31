@@ -15,4 +15,16 @@ class Movie extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+
+    public function getImageUrl(): string
+    {
+        return config('services.movies.image_url').$this->getAttribute('poster_path');
+    }
+
+    public function isFavorite(): bool
+    {
+        return $this->hasOne(FavoriteMovie::class, 'movie_id', 'id')
+            ->where('user_id', request()->user()->id)
+            ->exists();
+    }
 }

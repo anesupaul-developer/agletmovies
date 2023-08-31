@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-interface MovieRepositoryInterface
+interface BaseRepositoryInterface
 {
     public function findAll(): LengthAwarePaginator;
 }

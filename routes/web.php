@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FavoriteMovieController;
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/favorite-movies', [FavoriteMovieController::class, 'index'])->name('favorite.movies');
+    Route::post('/favorite-movies', [FavoriteMovieController::class, 'store'])->name('favorite.movies.store');
+    Route::get('/movies', [MovieController::class, 'index'])->name('movies');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

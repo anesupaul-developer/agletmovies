@@ -2,7 +2,7 @@
 
 1. Please ensure that your running php 8.1 and npm or yarn are installed on your machine
 2. Clone the project on your machine using git clone https://github.com/anesupaul-developer/agletmovies.git
-3. Copy .env.example to a new file .env
+3. Copy .env.example to a new file .env and run php artisan key:generate command
 4. Please make sure that these parameters in your env have been set
     - DB_CONNECTION
     - DB_HOST 

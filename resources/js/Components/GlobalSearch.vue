@@ -24,17 +24,22 @@ import {onMounted, ref, toRefs, watch} from "vue";
 import {throttle} from "lodash";
 import {Icon} from "@iconify/vue";
 
-const props = defineProps(['routeName', 'filters']);
+const props = defineProps(['routeName', 'filters', 'placeholder']);
 
-const { routeName, filters } = toRefs(props);
+const { routeName, filters, placeholder } = toRefs(props);
 
 let search = ref('');
 let isSearching = ref(false);
+let placeholderText = ref('');
 
 onMounted(() => {
     const query = filters.value.search;
     if (query) {
         search.value = query;
+    }
+
+    if (placeholder.value) {
+        placeholderText.value = placeholder.value;
     }
 });
 

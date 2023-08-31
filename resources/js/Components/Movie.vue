@@ -11,8 +11,8 @@
             <h1 class="text-center p-2.5 font-semibold text-sm">{{ movie.title }}</h1>
             <div class="flex justify-between items-center pl-6 pr-6 mt-3">
                 <span class="text-center m-2.5 p-1.5 text-xs">{{ movie.released_on }}</span>
-                <button type="button" class="text-white bg-grey-400 hover:bg-gray-50 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2">
-                    <Icon icon="simple-line-icons:direction" class="text-orange-400 text-[24px]"/>
+                <button @click="showMovieDetails" type="button" class="text-white bg-grey-400 hover:bg-gray-100 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2">
+                    <Icon icon="material-symbols:visibility-outline-rounded" class="text-gray-800 text-[24px]"/>
                 </button>
             </div>
         </div>

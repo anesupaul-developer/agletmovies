@@ -34,7 +34,7 @@ class FavoriteMovieController extends Controller
         ]);
     }
 
-    public function store(FavoriteMovieRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(FavoriteMovieRequest $request): void
     {
 
         $data = [...$request->validated(), 'user_id' => $request->user()->id];
@@ -48,8 +48,6 @@ class FavoriteMovieController extends Controller
         } else {
             $favorite->delete();
         }
-
-        return Redirect::route('movies');
 
     }
 }

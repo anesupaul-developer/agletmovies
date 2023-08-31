@@ -1,7 +1,7 @@
 <template>
     <MainLayout>
         <template v-slot:appsearch>
-            <GlobalSearch routeName="favorite.movies" :filters="filters"/>
+            <GlobalSearch routeName="favorite.movies" :filters="filters" placeholder="Search favorite movie by name ... "/>
         </template>
 
         <div class="bg-[#F2F2F2]">

@@ -1,7 +1,7 @@
 <template>
     <MainLayout>
         <template v-slot:appsearch>
-            <GlobalSearch :routeName="'movies'" :filters="filters"/>
+            <GlobalSearch :routeName="'movies'" :filters="filters" placeholder="Search movie by name ... "/>
         </template>
         <div class="bg-[#F2F2F2]">
             <div id="IndexPage" class="mt-3 max-w-[1400px] mx-auto px-2">

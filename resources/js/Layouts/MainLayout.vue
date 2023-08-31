@@ -8,6 +8,9 @@
                 <li class="border-r border-r-gray-400 px-3 hover:text-redapple cursor-pointer">
                     <a :href="route('movies')">Watch</a>
                 </li>
+                <li class="border-r border-r-gray-400 px-3 hover:text-redapple cursor-pointer">
+                    <a :href="route('socials')">Socials</a>
+                </li>
                 <li class="relative flex items-center px-2.5 hover:text-redapple h-full cursor-pointer"
                     :class="isAccountMenu ? 'bg-white border z-40 shadow-[0_15px_100px_40px_rgba(0,0,0,0.3)]' : 'border border-[#FAFAFA]'"
                     @mouseenter="isAccountMenu = true"

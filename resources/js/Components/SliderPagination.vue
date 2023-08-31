@@ -32,11 +32,11 @@ const { items, filters } = toRefs(props);
 onMounted(() => {
     const currentPage = filters.value.page;
 
-    if (currentPage >= items.value.last_page) {
+    if (currentPage >= items.value.last_page || items.value.current_page >= items.value.last_page) {
         disableNextBtn.value = true;
     }
 
-    if (currentPage <= 1) {
+    if (currentPage <= 1 || items.value.current_page <= 1) {
         disablePreviousBtn.value = true;
     }
 });

@@ -19,7 +19,7 @@ class MovieController extends Controller
 
         return Inertia::render('Movies/Watch', [
             'movies' => $movies,
-            'filters' => Request::only(['search'])
+            'filters' => Request::only(['search', 'page'])
         ]);
     }
 }

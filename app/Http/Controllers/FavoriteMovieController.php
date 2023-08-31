@@ -4,34 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FavoriteMovieRequest;
 use App\Models\FavoriteMovie;
-use App\Models\Movie;
+use App\Responses\MovieResponse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class FavoriteMovieController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $favorites = FavoriteMovie::query()
+            ->where('user_id', $request->user()->id)
+            ->with('movie')
+            ->whereHas('movie', function ($query) {
+                $search = request()->input('search');
+                if ($search) {
+                    $query->where('title', 'like', "%{$search}%");
+                }
+            })
             ->paginate(9)
             ->withQueryString()
-            ->through(fn($movie) => [
-                'id' => $movie->id,
-                'is_favorite' => $movie->isFavorite(),
-                'external_id' => $movie->movie_external_id,
-                'title' => $movie->title,
-                'poster_image_url' => $movie->getImageUrl(),
-                'description' => $movie->overview,
-                'released_on' => Carbon::parse($movie->release_date)->format('M d Y'),
-            ]);
+            ->through(fn($favoriteMovie) => (new MovieResponse($favoriteMovie->movie))->toArray());
+
         return Inertia::render('Movies/Favorite', [
-            'movies' => []
+            'movies' => $favorites,
+            'filters' => \Illuminate\Support\Facades\Request::only(['search', 'page'])
         ]);
     }
 
-    public function store(FavoriteMovieRequest $request): void
+    public function store(FavoriteMovieRequest $request): \Illuminate\Http\RedirectResponse
     {
 
         $data = [...$request->validated(), 'user_id' => $request->user()->id];
@@ -45,6 +48,8 @@ class FavoriteMovieController extends Controller
         } else {
             $favorite->delete();
         }
+
+        return Redirect::route('movies');
 
     }
 }

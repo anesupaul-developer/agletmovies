@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Movie;
+use App\Responses\MovieResponse;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Request;
@@ -19,14 +20,6 @@ class MovieRepository implements MovieRepositoryInterface
             })
             ->paginate(9)
             ->withQueryString()
-            ->through(fn($movie) => [
-                'id' => $movie->id,
-                'is_favorite' => $movie->isFavorite(),
-                'external_id' => $movie->movie_external_id,
-                'title' => $movie->title,
-                'poster_image_url' => $movie->getImageUrl(),
-                'description' => $movie->overview,
-                'released_on' => Carbon::parse($movie->release_date)->format('M d Y'),
-            ]);
+            ->through(fn($movie) => (new MovieResponse($movie))->toArray());
     }
 }

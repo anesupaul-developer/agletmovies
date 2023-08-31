@@ -21,6 +21,11 @@ class Movie extends Model
         return config('services.movies.image_url').$this->getAttribute('poster_path');
     }
 
+    public function getBackdropUrl(): string
+    {
+        return config('services.movies.image_url').$this->getAttribute('backdrop_path');
+    }
+
     public function isFavorite(): bool
     {
         return $this->hasOne(FavoriteMovie::class, 'movie_id', 'id')

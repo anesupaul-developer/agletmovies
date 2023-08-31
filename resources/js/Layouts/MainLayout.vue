@@ -13,7 +13,7 @@
                     @mouseenter="isAccountMenu = true"
                     @mouseleave="isAccountMenu = false">
                     <Icon icon="material-symbols:person" class="text-[17px] pr-0.5" aria-hidden="true"/>
-                    Account
+                    Account ({{ $page.props.auth.user.name }})
                     <Icon icon="mdi:chevron-down" class="text-[15px] ml-5"/>
 
                     <div id="AccountMenu"
@@ -38,66 +38,23 @@
                     <img src="/images/logo.svg" width="170" alt="logo"/>
                 </NavLink>
 
-                <div id="SearchBar" class="max-w-[700px] w-full md:block hidden">
-                    <div class="relative">
-                        <div class="flex items-center border-2 border-none rounded-md w-full">
-                            <div class="absolute -inset-y-0 right-10 flex items-center pl-3 pointer-events-none">
-                                <Icon v-if="isSearching" icon="eos-icons:loading"
-                                      class="text-redapple mr-2 text-[25px]"/>
-                            </div>
-
-                            <input
-                                class="w-full placeholder-gray-400 border-redapple text-sm pl-3 focus:outline-none focus:border-none"
-                                placeholder="Search for a movie ... "
-                                v-model="search"
-                                type="text"/>
-                        </div>
-                    </div>
-                </div> <!-- End of Search Bar -->
+                <slot name="appsearch"/>
             </div> <!-- End of Main Header 1 -->
         </div> <!-- End of Main Header -->
     </div>
-
-    <Loading v-if="userStore.isLoading"/>
 
     <div class="lg:pt-[150px] md:pt-[130px] pt-[80px]"/>
     <slot class="bg-[#F2F2F2]"/>
 </template>
 
 <script setup>
-import {ref, watch} from "vue";
+import {ref} from "vue";
 import {Icon} from '@iconify/vue';
 import NavLink from "../Components/NavLink.vue";
-import Loading from "../Components/Loading.vue";
-import {useUserStore} from "../Stores/UserStore.js";
 import DropdownLink from "@/Components/DropdownLink.vue";
-import { router } from '@inertiajs/vue3';
-import { throttle } from "lodash";
 
-let search = ref('');
-let searchItems = ref([]);
-let isSearching = ref(false);
 let isAccountMenu = ref(false);
-
-let userStore = useUserStore();
-
-const props = defineProps({
+defineProps({
     filters: Object
 });
-
-watch(search, value => {
-    router.get(route('movies'),{search:value},{
-        preserveState:true,
-        replace:true
-    });
-});
-
-watch(search, throttle(function(value) {
-    router.get(route('movies'),{search:value},{
-        preserveState:true,
-        replace:true
-    });
-}, 300));
-
-
 </script>

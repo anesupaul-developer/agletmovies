@@ -31,6 +31,8 @@
    - I used reusable components like the GlobalSearch Component to easily use the functionality on searching different pages
    - On the backend I went with an approach of combining database logic and controller logic as this is a smaller app
      In a large application I would have gone with something like Repository Pattern
+   - In a more complex application I would have added tests for data integrity
+   - I used Laravel Pint to format my code so in teams it can be standard
 
 ## Steps on developing the project
 

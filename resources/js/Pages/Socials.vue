@@ -1,6 +1,6 @@
 <template>
     <MainLayout>
-        <div class="bg-[#F2F2F2]">
+        <div class="">
             <div id="IndexPage" class="mt-3 max-w-[1400px] mx-auto px-2">
                 <div class="">
                     <h1 class="font-bold pt-3 text-xl">Contact Info</h1>

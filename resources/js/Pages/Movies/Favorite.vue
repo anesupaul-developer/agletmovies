@@ -4,7 +4,7 @@
             <GlobalSearch routeName="favorite.movies" :filters="filters" placeholder="Search favorite movie by name ... "/>
         </template>
 
-        <div class="bg-[#F2F2F2]">
+        <div class="bg-[#F9F9F9]">
             <div id="IndexPage" class="mt-3 max-w-[1400px] mx-auto px-2">
                 <div class="">
                     <h1 class="font-bold pt-3 text-xl">My Favorite Movies</h1>

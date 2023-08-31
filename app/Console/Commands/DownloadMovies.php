@@ -18,7 +18,7 @@ class DownloadMovies extends Command
     public function handle(): int
     {
         try {
-            $authHeader = "Bearer " . config('services.movies.token');
+            $authHeader = 'Bearer '.config('services.movies.token');
 
             $response = Http::acceptJson()
                 ->withHeader('Authorization', $authHeader)
@@ -29,9 +29,9 @@ class DownloadMovies extends Command
             $this->info('Successfully');
 
             return self::SUCCESS;
-        } catch(Exception $exception) {
+        } catch (Exception $exception) {
             Log::error($exception->getTraceAsString());
-            $this->info('Error: '. $exception->getMessage());
+            $this->info('Error: '.$exception->getMessage());
         }
 
         return self::FAILURE;

@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FavoriteMovieRequest;
 use App\Models\FavoriteMovie;
 use App\Responses\MovieResponse;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -26,28 +24,26 @@ class FavoriteMovieController extends Controller
             })
             ->paginate(9)
             ->withQueryString()
-            ->through(fn($favoriteMovie) => (new MovieResponse($favoriteMovie->movie))->toArray());
+            ->through(fn ($favoriteMovie) => (new MovieResponse($favoriteMovie->movie))->toArray());
 
         return Inertia::render('Movies/Favorite', [
             'movies' => $favorites,
-            'filters' => \Illuminate\Support\Facades\Request::only(['search', 'page'])
+            'filters' => \Illuminate\Support\Facades\Request::only(['search', 'page']),
         ]);
     }
 
     public function store(FavoriteMovieRequest $request): void
     {
-
         $data = [...$request->validated(), 'user_id' => $request->user()->id];
 
         $favorite = FavoriteMovie::where('user_id', $request->user()->id)
             ->where('movie_id', $data['movie_id'])
             ->first();
 
-        if (!$favorite) {
+        if (! $favorite) {
             FavoriteMovie::query()->create($data);
         } else {
             $favorite->delete();
         }
-
     }
 }

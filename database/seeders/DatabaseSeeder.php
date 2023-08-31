@@ -19,12 +19,12 @@ class DatabaseSeeder extends Seeder
             ->where('email', 'jointheteam@aglet.co.za')
             ->exists();
 
-        if (!$exists) {
+        if (! $exists) {
             User::factory()->create([
                 'name' => 'Team Aglet',
                 'username' => 'jointheteam',
                 'email' => 'jointheteam@aglet.co.za',
-                'password' => Hash::make('@TeamAglet')
+                'password' => Hash::make('@TeamAglet'),
             ]);
         }
 

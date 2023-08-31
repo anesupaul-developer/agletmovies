@@ -34,7 +34,7 @@ return [
     'movies' => [
         'url' => env('MOVIES_URL'),
         'token' => env('MOVIES_BEARER_TOKEN'),
-        'image_url' => env('MOVIES_IMAGE_URL')
+        'image_url' => env('MOVIES_IMAGE_URL'),
     ],
 
 ];
